@@ -1,0 +1,146 @@
+/* ---------------------------------------------------------------------------
+   Projects — section-scoped styles.
+
+   Decorative background layers and card treatments only; all colors come from
+   the semantic OKLCH tokens in index.css so both themes stay in sync. Motion is
+   disabled under prefers-reduced-motion.
+--------------------------------------------------------------------------- */
+
+.projects {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* --- Background layers ---------------------------------------------------- */
+
+.projects__grid {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background-image: linear-gradient(
+      to right,
+      oklch(var(--foreground) / 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      oklch(var(--foreground) / 0.04) 1px,
+      transparent 1px
+    );
+  background-size: 56px 56px;
+  mask-image: radial-gradient(
+    ellipse 75% 65% at 30% 30%,
+    black 25%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 75% 65% at 30% 30%,
+    black 25%,
+    transparent 100%
+  );
+}
+
+.projects__orb {
+  z-index: -2;
+}
+
+.projects__orb--violet {
+  top: -12%;
+  right: -10%;
+  width: 28rem;
+  height: 28rem;
+  background: oklch(var(--gradient-from) / 0.38);
+}
+
+.projects__orb--cyan {
+  bottom: -14%;
+  left: -12%;
+  width: 26rem;
+  height: 26rem;
+  background: oklch(var(--gradient-to) / 0.32);
+}
+
+/* --- Project cards -------------------------------------------------------- */
+
+.projects__card {
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.projects__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--gradient-subtle);
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.projects__card:hover::before {
+  opacity: 0.7;
+}
+
+.projects__icon {
+  box-shadow: 0 0 0 1px oklch(var(--foreground) / 0.06), 0 0 24px -8px
+    oklch(var(--gradient-from) / 0.55);
+}
+
+/* --- Status badges -------------------------------------------------------- */
+
+.projects__status {
+  white-space: nowrap;
+}
+
+.projects__status--completed {
+  border-color: oklch(var(--success) / 0.4);
+  background: oklch(var(--success) / 0.12);
+  color: oklch(var(--success));
+}
+
+.projects__status--building {
+  border-color: oklch(var(--warning) / 0.4);
+  background: oklch(var(--warning) / 0.12);
+  color: oklch(var(--warning));
+}
+
+/* --- Action links --------------------------------------------------------- */
+
+.projects__action {
+  border: 1px solid oklch(var(--foreground) / 0.12);
+  color: oklch(var(--foreground));
+  transition: var(--transition-smooth);
+}
+
+.projects__action:focus-visible {
+  outline: 2px solid oklch(var(--ring));
+  outline-offset: 2px;
+}
+
+.projects__action--primary {
+  border-color: transparent;
+  background-image: var(--gradient-primary);
+  color: oklch(var(--primary-foreground));
+}
+
+.projects__action--primary:hover {
+  box-shadow: var(--glow-primary);
+  transform: translateY(-1px);
+}
+
+.projects__action:not(.projects__action--primary):not(
+    .projects__action--disabled
+  ):hover {
+  border-color: oklch(var(--accent) / 0.5);
+  color: oklch(var(--accent));
+}
+
+.projects__action--disabled {
+  border-style: dashed;
+  color: oklch(var(--muted-foreground));
+  opacity: 0.75;
+}

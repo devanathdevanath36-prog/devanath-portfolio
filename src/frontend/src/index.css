@@ -1,0 +1,256 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------------------
+   Fonts — bundled variable woff2, served from /assets/fonts/
+--------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 300 700;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("/assets/fonts/DMSans.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 100 1000;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 100 800;
+}
+
+@layer base {
+  /* ----------------------------------------------------------------
+     LIGHT — cool porcelain, deep violet primary, cyan accent.
+     fg-on-bg L diff = 0.985 - 0.185 = 0.80 (AA+)
+     fg-on-primary L diff = 0.98 - 0.48 = 0.50 (AA+)
+  ---------------------------------------------------------------- */
+  :root {
+    --font-display: "Space Grotesk";
+    --font-body: "DM Sans";
+    --font-mono: "JetBrains Mono";
+    --radius: 0.75rem;
+
+    --background: 0.985 0.004 275;
+    --foreground: 0.185 0.02 275;
+    --card: 1.0 0.002 275;
+    --card-foreground: 0.185 0.02 275;
+    --popover: 1.0 0.002 275;
+    --popover-foreground: 0.185 0.02 275;
+
+    --primary: 0.48 0.22 292;
+    --primary-foreground: 0.98 0.006 292;
+
+    --secondary: 0.945 0.012 275;
+    --secondary-foreground: 0.27 0.02 275;
+    --muted: 0.945 0.012 275;
+    --muted-foreground: 0.5 0.018 275;
+
+    --accent: 0.58 0.14 200;
+    --accent-foreground: 0.98 0.006 200;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0.006 25;
+    --success: 0.55 0.16 155;
+    --warning: 0.72 0.15 85;
+
+    --border: 0.9 0.01 275;
+    --input: 0.9 0.01 275;
+    --ring: 0.48 0.22 292;
+
+    /* Aurora gradient pair — violet -> cyan */
+    --gradient-from: 0.55 0.24 295;
+    --gradient-to: 0.72 0.15 195;
+    --gradient-primary: linear-gradient(
+      120deg,
+      oklch(var(--gradient-from)) 0%,
+      oklch(var(--gradient-to)) 100%
+    );
+    --gradient-subtle: linear-gradient(
+      120deg,
+      oklch(var(--gradient-from) / 0.12) 0%,
+      oklch(var(--gradient-to) / 0.12) 100%
+    );
+
+    /* Glass surfaces */
+    --glass-bg: oklch(1.0 0.002 275 / 0.72);
+    --glass-border: oklch(0.185 0.02 275 / 0.08);
+    --glass-shadow: 0 8px 32px -8px oklch(0.185 0.02 275 / 0.14);
+
+    /* Glow shadows — restrained, never neon */
+    --glow-primary: 0 0 0 1px oklch(var(--gradient-from) / 0.18), 0 6px 24px
+      -6px oklch(var(--gradient-from) / 0.35);
+    --glow-accent: 0 0 0 1px oklch(var(--gradient-to) / 0.18), 0 6px 24px -6px
+      oklch(var(--gradient-to) / 0.32);
+
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --chart-1: 0.55 0.24 295;
+    --chart-2: 0.72 0.15 195;
+    --chart-3: 0.6 0.16 155;
+    --chart-4: 0.72 0.15 85;
+    --chart-5: 0.55 0.22 25;
+
+    --sidebar: 0.985 0.004 275;
+    --sidebar-foreground: 0.185 0.02 275;
+    --sidebar-primary: 0.48 0.22 292;
+    --sidebar-primary-foreground: 0.98 0.006 292;
+    --sidebar-accent: 0.945 0.012 275;
+    --sidebar-accent-foreground: 0.27 0.02 275;
+    --sidebar-border: 0.9 0.01 275;
+    --sidebar-ring: 0.48 0.22 292;
+  }
+
+  /* ----------------------------------------------------------------
+     DARK (DEFAULT) — deep indigo void, aurora violet/cyan accents.
+     fg-on-bg L diff = 0.95 - 0.145 = 0.805 (AA+)
+     fg-on-primary L diff = 0.145 - 0.62 = 0.475 (AA+)
+  ---------------------------------------------------------------- */
+  .dark {
+    --background: 0.145 0.02 275;
+    --foreground: 0.95 0.008 275;
+    --card: 0.185 0.022 275;
+    --card-foreground: 0.95 0.008 275;
+    --popover: 0.21 0.024 275;
+    --popover-foreground: 0.95 0.008 275;
+
+    --primary: 0.62 0.24 295;
+    --primary-foreground: 0.145 0.02 295;
+
+    --secondary: 0.23 0.024 275;
+    --secondary-foreground: 0.88 0.008 275;
+    --muted: 0.23 0.024 275;
+    --muted-foreground: 0.62 0.016 275;
+
+    --accent: 0.78 0.15 195;
+    --accent-foreground: 0.145 0.02 195;
+
+    --destructive: 0.62 0.2 22;
+    --destructive-foreground: 0.95 0.008 22;
+    --success: 0.68 0.16 155;
+    --warning: 0.78 0.15 85;
+
+    --border: 0.29 0.024 275;
+    --input: 0.29 0.024 275;
+    --ring: 0.68 0.2 295;
+
+    --gradient-from: 0.68 0.24 295;
+    --gradient-to: 0.82 0.14 195;
+
+    --glass-bg: oklch(0.185 0.022 275 / 0.55);
+    --glass-border: oklch(0.95 0.008 275 / 0.1);
+    --glass-shadow: 0 8px 32px -8px oklch(0.05 0.02 275 / 0.6);
+
+    --glow-primary: 0 0 0 1px oklch(var(--gradient-from) / 0.25), 0 6px 28px
+      -6px oklch(var(--gradient-from) / 0.45);
+    --glow-accent: 0 0 0 1px oklch(var(--gradient-to) / 0.25), 0 6px 28px -6px
+      oklch(var(--gradient-to) / 0.4);
+
+    --chart-1: 0.68 0.24 295;
+    --chart-2: 0.82 0.14 195;
+    --chart-3: 0.68 0.16 155;
+    --chart-4: 0.78 0.15 85;
+    --chart-5: 0.62 0.2 22;
+
+    --sidebar: 0.185 0.022 275;
+    --sidebar-foreground: 0.95 0.008 275;
+    --sidebar-primary: 0.62 0.24 295;
+    --sidebar-primary-foreground: 0.145 0.02 295;
+    --sidebar-accent: 0.23 0.024 275;
+    --sidebar-accent-foreground: 0.88 0.008 275;
+    --sidebar-border: 0.29 0.024 275;
+    --sidebar-ring: 0.68 0.2 295;
+  }
+
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    /* Guard against any page-level horizontal scrollbar at every width. */
+    overflow-x: hidden;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: oklch(var(--gradient-from) / 0.3);
+    color: oklch(var(--foreground));
+  }
+
+  /* Respect the user's motion preference for CSS-driven animation. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  /* Aurora gradient text — logo + active nav labels */
+  .text-gradient-aurora {
+    background-image: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  /* Aurora gradient fill — active indicator, buttons */
+  .bg-gradient-aurora {
+    background-image: var(--gradient-primary);
+  }
+  .bg-gradient-aurora-subtle {
+    background-image: var(--gradient-subtle);
+  }
+
+  /* Glassmorphism surface recipe */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+  .glass-nav {
+    background: var(--glass-bg);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  /* Restrained glow on interactive elements */
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+  .glow-accent {
+    box-shadow: var(--glow-accent);
+  }
+
+  /* Ambient background orbs */
+  .orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(90px);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+}

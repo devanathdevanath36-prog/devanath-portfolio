@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Devanath — Developer Portfolio</title>
+    <meta name="description" content="Devanath — software developer portfolio." />
+    <meta property="og:title" content="Devanath — Developer Portfolio" />
+    <meta property="og:description" content="Devanath — software developer portfolio." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://caffeine.ai/imgs/share-logo.jpeg" />
+    <meta property="og:image:alt" content="Devanath — Developer Portfolio" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://caffeine.ai/imgs/share-logo.jpeg" />
+    <meta name="theme-color" content="#1a1625" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("devanath-theme");
+          var theme = stored === "light" || stored === "dark" ? stored : "dark";
+          var root = document.documentElement;
+          root.classList.toggle("dark", theme === "dark");
+          root.style.colorScheme = theme;
+        } catch (e) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-D3qmYqYy.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CzqweuGK.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

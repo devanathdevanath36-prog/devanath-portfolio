@@ -1,0 +1,108 @@
+/* ---------------------------------------------------------------------------
+   About — section-scoped styles.
+
+   Decorative background layers only; all colors come from the semantic OKLCH
+   tokens in index.css so both themes stay in sync. Motion is disabled under
+   prefers-reduced-motion.
+--------------------------------------------------------------------------- */
+
+.about {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* --- Background layers ---------------------------------------------------- */
+
+.about__grid {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background-image: linear-gradient(
+      to right,
+      oklch(var(--foreground) / 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      oklch(var(--foreground) / 0.04) 1px,
+      transparent 1px
+    );
+  background-size: 56px 56px;
+  mask-image: radial-gradient(
+    ellipse 75% 65% at 30% 35%,
+    black 25%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 75% 65% at 30% 35%,
+    black 25%,
+    transparent 100%
+  );
+}
+
+.about__orb {
+  z-index: -2;
+}
+
+.about__orb--violet {
+  top: -14%;
+  right: -10%;
+  width: 30rem;
+  height: 30rem;
+  background: oklch(var(--gradient-from) / 0.4);
+}
+
+.about__orb--cyan {
+  bottom: -16%;
+  left: -12%;
+  width: 26rem;
+  height: 26rem;
+  background: oklch(var(--gradient-to) / 0.34);
+}
+
+/* --- Profile card --------------------------------------------------------- */
+
+.about__card {
+  position: relative;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.about__avatar {
+  box-shadow: 0 0 0 1px oklch(var(--foreground) / 0.08), 0 0 32px -6px
+    oklch(var(--gradient-from) / 0.6);
+}
+
+.about__avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  object-fit: cover;
+  object-position: center top;
+  /* Gradient ring around the portrait — same recipe as the hero core. */
+  border: 2px solid transparent;
+  background-image: linear-gradient(
+      oklch(var(--background)),
+      oklch(var(--background))
+    ), var(--gradient-primary);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+/* --- Approach block ------------------------------------------------------- */
+
+.about__approach {
+  position: relative;
+  overflow: hidden;
+}
+
+.about__approach::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--gradient-subtle);
+  opacity: 0.6;
+  pointer-events: none;
+}

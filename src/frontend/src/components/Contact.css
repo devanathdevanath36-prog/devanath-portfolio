@@ -1,0 +1,114 @@
+/* ---------------------------------------------------------------------------
+   Contact — section-scoped styles.
+
+   Decorative background layers only; all colors come from the semantic OKLCH
+   tokens in index.css so both themes stay in sync. Motion is disabled under
+   prefers-reduced-motion.
+--------------------------------------------------------------------------- */
+
+.contact {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* --- Background layers ---------------------------------------------------- */
+
+.contact__grid {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background-image: linear-gradient(
+      to right,
+      oklch(var(--foreground) / 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      oklch(var(--foreground) / 0.04) 1px,
+      transparent 1px
+    );
+  background-size: 56px 56px;
+  mask-image: radial-gradient(
+    ellipse 75% 65% at 70% 30%,
+    black 25%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 75% 65% at 70% 30%,
+    black 25%,
+    transparent 100%
+  );
+}
+
+.contact__orb {
+  z-index: -2;
+}
+
+.contact__orb--violet {
+  top: -12%;
+  left: -10%;
+  width: 28rem;
+  height: 28rem;
+  background: oklch(var(--gradient-from) / 0.38);
+}
+
+.contact__orb--cyan {
+  bottom: -14%;
+  right: -12%;
+  width: 26rem;
+  height: 26rem;
+  background: oklch(var(--gradient-to) / 0.32);
+}
+
+/* --- Contact cards -------------------------------------------------------- */
+
+.contact__card {
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.contact__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--gradient-subtle);
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.contact__card:hover::before {
+  opacity: 0.7;
+}
+
+.contact__index {
+  text-shadow: 0 0 24px oklch(var(--gradient-from) / 0.45);
+}
+
+.contact__icon {
+  box-shadow: 0 0 0 1px oklch(var(--accent) / 0.12), 0 0 22px -8px
+    oklch(var(--gradient-from) / 0.5);
+}
+
+.contact__link-icon {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact__link:hover .contact__link-icon,
+.contact__link:focus-visible .contact__link-icon {
+  transform: translate(2px, -2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact__link-icon {
+    transition: none;
+  }
+  .contact__link:hover .contact__link-icon,
+  .contact__link:focus-visible .contact__link-icon {
+    transform: none;
+  }
+}

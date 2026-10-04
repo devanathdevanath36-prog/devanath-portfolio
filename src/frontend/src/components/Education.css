@@ -1,0 +1,129 @@
+/* ---------------------------------------------------------------------------
+   Education — section-scoped styles.
+
+   Decorative background layers only; all colors come from the semantic OKLCH
+   tokens in index.css so both themes stay in sync. Motion is disabled under
+   prefers-reduced-motion.
+--------------------------------------------------------------------------- */
+
+.education {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* --- Background layers ---------------------------------------------------- */
+
+.education__grid {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background-image: linear-gradient(
+      to right,
+      oklch(var(--foreground) / 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      oklch(var(--foreground) / 0.04) 1px,
+      transparent 1px
+    );
+  background-size: 56px 56px;
+  mask-image: radial-gradient(
+    ellipse 75% 65% at 30% 30%,
+    black 25%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 75% 65% at 30% 30%,
+    black 25%,
+    transparent 100%
+  );
+}
+
+.education__orb {
+  z-index: -2;
+}
+
+.education__orb--violet {
+  top: -12%;
+  right: -10%;
+  width: 28rem;
+  height: 28rem;
+  background: oklch(var(--gradient-from) / 0.38);
+}
+
+.education__orb--cyan {
+  bottom: -14%;
+  left: -12%;
+  width: 26rem;
+  height: 26rem;
+  background: oklch(var(--gradient-to) / 0.32);
+}
+
+/* --- Education cards ------------------------------------------------------ */
+
+.education__card {
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.education__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--gradient-subtle);
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.education__card:hover::before {
+  opacity: 0.7;
+}
+
+.education__icon {
+  box-shadow: 0 0 0 1px oklch(var(--foreground) / 0.06), 0 0 24px -8px
+    oklch(var(--gradient-from) / 0.55);
+}
+
+.education__index {
+  line-height: 1;
+}
+
+/* --- Status badges -------------------------------------------------------- */
+
+.education__status--current {
+  box-shadow: 0 0 0 1px oklch(var(--gradient-from) / 0.2), 0 0 20px -6px
+    oklch(var(--gradient-from) / 0.5);
+}
+
+.education__status--current .education__status-dot {
+  background: oklch(var(--gradient-from));
+  animation: education-pulse 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.education__status--done .education__status-dot {
+  background: oklch(var(--muted-foreground));
+}
+
+@keyframes education-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.75);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .education__status--current .education__status-dot {
+    animation: none;
+  }
+}

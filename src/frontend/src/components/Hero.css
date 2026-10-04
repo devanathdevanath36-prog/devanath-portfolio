@@ -1,0 +1,387 @@
+/* ---------------------------------------------------------------------------
+   Hero — section-scoped styles.
+
+   Everything here is decorative or layout-specific to the hero. Colors still
+   come from the semantic OKLCH tokens defined in index.css, so both themes
+   stay in sync. All motion is disabled under prefers-reduced-motion.
+--------------------------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* --- Background layers ---------------------------------------------------- */
+
+.hero__grid {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background-image: linear-gradient(
+      to right,
+      oklch(var(--foreground) / 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      oklch(var(--foreground) / 0.05) 1px,
+      transparent 1px
+    );
+  background-size: 56px 56px;
+  mask-image: radial-gradient(
+    ellipse 80% 70% at 50% 40%,
+    black 30%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 80% 70% at 50% 40%,
+    black 30%,
+    transparent 100%
+  );
+}
+
+.hero__dots {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background-image: radial-gradient(
+    oklch(var(--foreground) / 0.14) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+  opacity: 0.5;
+  mask-image: radial-gradient(
+    ellipse 60% 55% at 78% 45%,
+    black 0%,
+    transparent 75%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 60% 55% at 78% 45%,
+    black 0%,
+    transparent 75%
+  );
+}
+
+.hero__orb {
+  z-index: -2;
+}
+
+.hero__orb--violet {
+  top: -12%;
+  left: -8%;
+  width: 34rem;
+  height: 34rem;
+  background: oklch(var(--gradient-from) / 0.5);
+}
+
+.hero__orb--cyan {
+  right: -10%;
+  bottom: -18%;
+  width: 30rem;
+  height: 30rem;
+  background: oklch(var(--gradient-to) / 0.42);
+}
+
+/* --- Availability badge --------------------------------------------------- */
+
+.hero__status-dot {
+  position: relative;
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: oklch(var(--success));
+}
+
+.hero__status-dot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 9999px;
+  border: 1px solid oklch(var(--success) / 0.6);
+  animation: hero-ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes hero-ping {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.9;
+  }
+  70%,
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+/* --- Developer visual ----------------------------------------------------- */
+
+.hero__visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  max-width: 30rem;
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
+  /* Reserve room for the floating chips and code card so nothing is clipped
+     by the section's overflow guard or pushes past the viewport edge. */
+  padding: 2.5rem;
+}
+
+.hero__ring {
+  position: absolute;
+  border-radius: 9999px;
+  border: 1px solid oklch(var(--foreground) / 0.1);
+}
+
+.hero__ring--outer {
+  inset: 2.5rem;
+  border-style: dashed;
+  border-color: oklch(var(--gradient-from) / 0.28);
+  animation: hero-spin 46s linear infinite;
+}
+
+.hero__ring--mid {
+  inset: calc(2.5rem + 12%);
+  border-color: oklch(var(--gradient-to) / 0.3);
+  animation: hero-spin-reverse 34s linear infinite;
+}
+
+.hero__ring--inner {
+  inset: calc(2.5rem + 24%);
+  border-color: oklch(var(--foreground) / 0.12);
+  animation: hero-spin 24s linear infinite;
+}
+
+.hero__ring-node {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 9999px;
+  background: oklch(var(--gradient-to));
+  box-shadow: 0 0 12px 2px oklch(var(--gradient-to) / 0.7);
+}
+
+.hero__ring--outer .hero__ring-node {
+  background: oklch(var(--gradient-from));
+  box-shadow: 0 0 12px 2px oklch(var(--gradient-from) / 0.7);
+}
+
+.hero__core {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 42%;
+  aspect-ratio: 1 / 1;
+  border-radius: 9999px;
+  background: var(--gradient-primary);
+  box-shadow: 0 0 0 1px oklch(var(--foreground) / 0.08), 0 0 60px -8px
+    oklch(var(--gradient-from) / 0.75), 0 0 90px -20px
+    oklch(var(--gradient-to) / 0.6);
+}
+
+.hero__core::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 9999px;
+  background: oklch(var(--background) / 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.hero__portrait {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  border-radius: 9999px;
+  object-fit: cover;
+  object-position: center top;
+  /* Gradient ring that ties the portrait into the orb design. */
+  border: 2px solid transparent;
+  background-image: linear-gradient(
+      oklch(var(--background)),
+      oklch(var(--background))
+    ), var(--gradient-primary);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 0 24px -4px oklch(var(--gradient-from) / 0.7);
+}
+
+/* Floating technology cards */
+.hero__chip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: oklch(var(--foreground));
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  white-space: nowrap;
+  animation: hero-float 7s ease-in-out infinite;
+}
+
+.hero__chip--1 {
+  top: 2%;
+  left: 4%;
+  animation-delay: 0s;
+}
+.hero__chip--2 {
+  top: 14%;
+  right: 2%;
+  animation-delay: -1.2s;
+}
+.hero__chip--3 {
+  top: 46%;
+  left: 0%;
+  animation-delay: -2.4s;
+}
+.hero__chip--4 {
+  bottom: 16%;
+  right: 4%;
+  animation-delay: -3.6s;
+}
+.hero__chip--5 {
+  bottom: 2%;
+  left: 14%;
+  animation-delay: -4.8s;
+}
+.hero__chip--6 {
+  top: 32%;
+  right: 10%;
+  animation-delay: -6s;
+}
+
+/* Code-inspired accent card */
+.hero__code {
+  position: absolute;
+  bottom: 4%;
+  right: 2%;
+  width: 11rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 0.75rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  line-height: 1.6;
+  color: oklch(var(--muted-foreground));
+  animation: hero-float 9s ease-in-out infinite;
+  animation-delay: -2s;
+}
+
+.hero__code-line {
+  display: flex;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.hero__code-key {
+  color: oklch(var(--accent));
+}
+
+.hero__code-str {
+  color: oklch(var(--primary));
+}
+
+@keyframes hero-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hero-spin-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+/* --- Scroll indicator ----------------------------------------------------- */
+
+.hero__scroll-arrow {
+  animation: hero-bob 1.8s ease-in-out infinite;
+}
+
+@keyframes hero-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(5px);
+    opacity: 1;
+  }
+}
+
+/* --- Responsive tuning ---------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .hero__visual {
+    max-width: 20rem;
+    padding: 1.75rem;
+  }
+  .hero__ring--outer {
+    inset: 1.75rem;
+  }
+  .hero__ring--mid {
+    inset: calc(1.75rem + 12%);
+  }
+  .hero__ring--inner {
+    inset: calc(1.75rem + 24%);
+  }
+  .hero__code {
+    display: none;
+  }
+  .hero__chip {
+    font-size: 0.62rem;
+    padding: 0.3rem 0.55rem;
+  }
+  .hero__chip--3 {
+    left: 0%;
+  }
+  .hero__chip--6 {
+    right: 4%;
+  }
+}
+
+/* --- Reduced motion ------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__ring--outer,
+  .hero__ring--mid,
+  .hero__ring--inner,
+  .hero__chip,
+  .hero__code,
+  .hero__scroll-arrow,
+  .hero__status-dot::after {
+    animation: none !important;
+  }
+}

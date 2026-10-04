@@ -1,0 +1,91 @@
+/* ---------------------------------------------------------------------------
+   Certifications — section-scoped styles.
+
+   Decorative background layers only; all colors come from the semantic OKLCH
+   tokens in index.css so both themes stay in sync. Motion is disabled under
+   prefers-reduced-motion.
+--------------------------------------------------------------------------- */
+
+.certifications {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* --- Background layers ---------------------------------------------------- */
+
+.certifications__grid {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background-image: linear-gradient(
+      to right,
+      oklch(var(--foreground) / 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      oklch(var(--foreground) / 0.04) 1px,
+      transparent 1px
+    );
+  background-size: 56px 56px;
+  mask-image: radial-gradient(
+    ellipse 75% 65% at 30% 30%,
+    black 25%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 75% 65% at 30% 30%,
+    black 25%,
+    transparent 100%
+  );
+}
+
+.certifications__orb {
+  z-index: -2;
+}
+
+.certifications__orb--violet {
+  top: -12%;
+  right: -10%;
+  width: 28rem;
+  height: 28rem;
+  background: oklch(var(--gradient-from) / 0.38);
+}
+
+.certifications__orb--cyan {
+  bottom: -14%;
+  left: -12%;
+  width: 26rem;
+  height: 26rem;
+  background: oklch(var(--gradient-to) / 0.32);
+}
+
+/* --- Certificate cards ---------------------------------------------------- */
+
+.certifications__card {
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.certifications__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--gradient-subtle);
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.certifications__card:hover::before {
+  opacity: 0.7;
+}
+
+.certifications__icon {
+  box-shadow: 0 0 0 1px oklch(var(--foreground) / 0.06), 0 0 24px -8px
+    oklch(var(--gradient-from) / 0.55);
+}

@@ -1,0 +1,17 @@
+{
+  "overview": "A personal developer portfolio for Devanath N with a dark, gradient-accented hero, project showcase, skills, experience, education, and certifications.",
+  "features": [
+    "Dark, gradient-accented hero with portrait and social links",
+    "About, Skills, Projects, Experience, Education, and Certifications sections",
+    "Light and dark theme toggle",
+    "Smooth-scroll navigation"
+  ],
+  "category": "portfolio",
+  "tags": [
+    "portfolio",
+    "developer",
+    "personal-site",
+    "showcase"
+  ],
+  "last_updated": "2026-09-30T14:55:32.218Z"
+}
